@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="transport.control.MainController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Exit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <VBox prefHeight="571.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: #f0f0f0;" BorderPane.alignment="CENTER">
+         <children>
+            <Label onMouseClicked="#handleHomeAction" style="-fx-cursor: hand;" text="ESI-RUN">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="Transport Management System" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAddUserAction" text="Add User/Employee" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBuyTicketAction" text="Buy Ticket" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleShowTicketsAction" text="View Tickets" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleValidateTicketAction" text="Validate Ticket" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleManageComplaintsAction" text="Manage Complaints" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </left>
+   <center>
+      <VBox fx:id="welcomeScreen" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Welcome to ESI-RUN">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="Transport Management System">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="Select an option from the menu to get started" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
