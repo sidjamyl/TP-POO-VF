@@ -8,35 +8,57 @@ import java.io.File;
 public class TestFX extends Application {
     public void start(Stage stage) {
         try {
-            // Try loading from file path instead of classpath
-            File fxmlFile = new File("src/transport/ui/MainWindow.fxml");
+            // Essayer de charger à partir du chemin du fichier plutôt que du classpath
+            File fichierFxml = new File("src/transport/ui/FenetrePrincipale.fxml");
 
-            if (!fxmlFile.exists()) {
-                System.err.println("Cannot find MainWindow.fxml at: " + fxmlFile.getAbsolutePath());
-                // Try alternative location
-                fxmlFile = new File("c:/Users/21355/Desktop/TUTO-4-POO/src/transport/ui/MainWindow.fxml");
+            if (!fichierFxml.exists()) {
+                System.err.println("Impossible de trouver FenetrePrincipale.fxml à: " + fichierFxml.getAbsolutePath());
+                // Essayer un autre emplacement
+                fichierFxml = new File(
+                        "c:/Users/21355/Desktop/TP_Yasmine_Aya/TP-POO/src/transport/ui/FenetrePrincipale.fxml");
 
-                if (!fxmlFile.exists()) {
-                    System.err.println("Cannot find MainWindow.fxml at alternate location either");
-                    return;
+                if (!fichierFxml.exists()) {
+                    System.err.println("Impossible de trouver FenetrePrincipale.fxml à l'emplacement alternatif");
+
+                    // Tenter avec l'ancien nom MainWindow.fxml (version anglaise)
+                    fichierFxml = new File("src/transport/ui/MainWindow.fxml");
+                    if (!fichierFxml.exists()) {
+                        System.err.println("Impossible de trouver également MainWindow.fxml");
+                        return;
+                    }
                 }
             }
 
-            System.out.println("Found FXML file at: " + fxmlFile.getAbsolutePath());
+            System.out.println("Fichier FXML trouvé à: " + fichierFxml.getAbsolutePath());
 
-            // Load the main window from file URL
-            Parent root = FXMLLoader.load(fxmlFile.toURI().toURL());
-            Scene scene = new Scene(root, 800, 600);
-            stage.setTitle("ESI-RUN - Transport Management System");
+            // Charger la fenêtre principale à partir de l'URL du fichier
+            FXMLLoader loader = new FXMLLoader(fichierFxml.toURI().toURL());
+            Parent racine = loader.load();
+            Scene scene = new Scene(racine, 900, 650);
+
+            try {
+                // Ajouter la feuille de style CSS
+                File fichierCSS = new File("src/transport/ui/styles/application.css");
+                if (fichierCSS.exists()) {
+                    scene.getStylesheets().add(fichierCSS.toURI().toURL().toString());
+                    System.out.println("CSS chargé avec succès");
+                } else {
+                    System.err.println("Fichier CSS introuvable: " + fichierCSS.getAbsolutePath());
+                }
+            } catch (Exception e) {
+                System.err.println("Erreur lors du chargement du CSS: " + e.getMessage());
+            }
+
+            stage.setTitle("ESI-RUN - Système de Gestion des Transports");
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            System.err.println("Error loading FXML: " + e.getMessage());
+            System.err.println("Erreur de chargement FXML: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }
